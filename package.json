@@ -15,5 +15,8 @@
     "bugs": {
         "url": "https://github.com/sballert/trial-task-kmh/issues"
     },
-    "homepage": "https://github.com/sballert/trial-task-kmh#readme"
+    "homepage": "https://github.com/sballert/trial-task-kmh#readme",
+    "dependencies": {
+        "typescript": "^4.8.3"
+    }
 }
