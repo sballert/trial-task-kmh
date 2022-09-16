@@ -1,0 +1,19 @@
+{
+    "name": "trial-task-kmh",
+    "version": "1.0.0",
+    "description": "A small REST API, which returns products, prices and user information for a certain or unknown user.",
+    "main": "src/app.ts",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/sballert/trial-task-kmh.git"
+    },
+    "author": "sballert",
+    "license": "GPL-3.0-or-later",
+    "bugs": {
+        "url": "https://github.com/sballert/trial-task-kmh/issues"
+    },
+    "homepage": "https://github.com/sballert/trial-task-kmh#readme"
+}
