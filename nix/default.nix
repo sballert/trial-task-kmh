@@ -15,7 +15,7 @@ in
   inherit pkgs;
 
   devTools = {
-    inherit (pkgs) niv bashInteractive;
+    inherit (pkgs) niv bashInteractive nodejs-18_x;
     inherit (pre-commit-hooks) pre-commit;
   };
 
