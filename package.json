@@ -2,9 +2,11 @@
     "name": "trial-task-kmh",
     "version": "1.0.0",
     "description": "A small REST API, which returns products, prices and user information for a certain or unknown user.",
-    "main": "src/app.ts",
+    "main": "build/app.js",
     "scripts": {
-        "dev": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json src/app.ts"
+        "dev": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json src/app.ts",
+        "build": "npx tsc",
+        "watch": "npx tsc -w"
     },
     "repository": {
         "type": "git",
