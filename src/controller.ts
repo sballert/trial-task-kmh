@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import log from "./logger";
 import { getCustomer } from "./service/customer";
 import { getAvailabilitiesForCustomer } from "./service/product-availability";
 import {
@@ -7,9 +8,19 @@ import {
 } from "./service/product";
 import { isEmpty, uniqBy, find } from "lodash";
 
-async function getProductsForCustomer(req: Request, res: Response) {
+async function getProductsForCustomer(
+  req: Request,
+  res: Response,
+): Promise<any> {
   try {
-    const customer = await getCustomer(req.body.customerId);
+    const customerId: string = req.body.customerId;
+    const isBusinessCustomer: string = req.body.isBusinessCustomer;
+
+    log.info(
+      `getProductsForCustomer(customerId="${customerId}",isBusinessCustomer="${isBusinessCustomer}")`,
+    );
+
+    const customer = await getCustomer(customerId);
     const generallyAvailableProducts = await getGenerallyAvailableProducts();
 
     let products = generallyAvailableProducts;
@@ -33,15 +44,6 @@ async function getProductsForCustomer(req: Request, res: Response) {
 
     products = uniqBy(products, (product) => product.productCode);
 
-    /*
-        products.map(product => {
-            if (Array.isArray(product.prices)) {
-                product.prices = find(product.prices, (price) => {
-                    return price.isExistingCustomer == isExistingCustomer
-                });
-            }
-        });
-        */
     const formatedProducts = [];
 
     for (const product of products) {
