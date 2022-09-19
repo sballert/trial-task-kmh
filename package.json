@@ -1,28 +1,38 @@
 {
-    "name": "trial-task-kmh",
-    "version": "1.0.0",
-    "description": "A small REST API, which returns products, prices and user information for a certain or unknown user.",
-    "main": "build/app.js",
-    "scripts": {
-        "dev": "./node_modules/nodemon/bin/nodemon.js --config nodemon.json src/app.ts",
-        "build": "npx tsc",
-        "watch": "npx tsc -w"
-    },
-    "repository": {
-        "type": "git",
-        "url": "git+https://github.com/sballert/trial-task-kmh.git"
-    },
-    "author": "sballert",
-    "license": "GPL-3.0-or-later",
-    "bugs": {
-        "url": "https://github.com/sballert/trial-task-kmh/issues"
-    },
-    "homepage": "https://github.com/sballert/trial-task-kmh#readme",
-    "dependencies": {
-    },
-    "devDependencies": {
-        "ts-node": "^10.9.1",
-        "typescript": "^4.8.3",
-        "nodemon": "^2.0.20"
-    }
+  "name": "trial-task-kmh",
+  "version": "1.0.0",
+  "description": "A small REST API, which returns products, prices and user information for a certain or unknown user.",
+  "main": "build/app.js",
+  "scripts": {
+    "dev": "npx nodemon --config nodemon.json src/app.ts",
+    "build": "npx tsc",
+    "watch": "npx tsc -w",
+    "lint": "npx eslint ./src --ext .ts",
+    "lint:fix": "npx eslint --fix ./src --ext .ts"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sballert/trial-task-kmh.git"
+  },
+  "author": "sballert",
+  "license": "GPL-3.0-or-later",
+  "bugs": {
+    "url": "https://github.com/sballert/trial-task-kmh/issues"
+  },
+  "homepage": "https://github.com/sballert/trial-task-kmh#readme",
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.37.0",
+    "@typescript-eslint/parser": "^5.37.0",
+    "eslint": "^8.23.1",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-config-standard-with-typescript": "^23.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-n": "^15.2.5",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-promise": "^6.0.1",
+    "nodemon": "^2.0.20",
+    "prettier": "^2.7.1",
+    "ts-node": "^10.9.1",
+    "typescript": "^4.8.3"
+  }
 }
