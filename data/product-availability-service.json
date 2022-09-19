@@ -1,0 +1,55 @@
+[
+  {
+    "customerId": "000000055",
+    "availableProducts": [
+      {
+        "productCode": "VAC-0085"
+      },
+      {
+        "productCode": "HAD-0064"
+      },
+      {
+        "productCode": "HAD-0963"
+      },
+      {
+        "productCode": "HAD-0513"
+      },
+      {
+        "productCode": "IRO-2683"
+      }
+    ]
+  },
+  {
+    "customerId": "000010453",
+    "availableProducts": []
+  },
+  {
+    "customerId": "0000104530",
+    "availableProducts": []
+  },
+  {
+    "customerId": "000066220",
+    "availableProducts": [
+      {
+        "productCode": "VAC-0085"
+      },
+      {
+        "productCode": "HAD-0963"
+      }
+    ]
+  },
+  {
+    "customerId": "000028390",
+    "availableProducts": [
+      {
+        "productCode": "VAC-0085"
+      },
+      {
+        "productCode": "HAD-0963"
+      },
+      {
+        "productCode": "HAD-0963"
+      }
+    ]
+  }
+]

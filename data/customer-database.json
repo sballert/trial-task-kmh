@@ -1,0 +1,42 @@
+[
+  {
+    "customerId": "00000055",
+    "gender": "male",
+    "givenName": "Max",
+    "surName": "Muster",
+    "birthDate": "1974-01-06",
+    "isBusinessCustomer": true
+  },
+  {
+    "customerId": "000066220",
+    "gender": "female",
+    "givenName": "Wilma",
+    "surName": "Wulmsdorf",
+    "birthDate": "1980-03-02",
+    "isBusinessCustomer": false
+  },
+  {
+    "customerId": "000028390",
+    "gender": "male",
+    "givenName": "Peter",
+    "surName": "Paulsen",
+    "birthDate": "1971-11-11",
+    "isBusinessCustomer": false
+  },
+  {
+    "customerId": "000010453",
+    "gender": "female",
+    "givenName": "Agathe",
+    "surName": "Angler",
+    "birthDate": "1965-05-21",
+    "isBusinessCustomer": true
+  },
+  {
+    "customerId": "000560412",
+    "gender": "",
+    "givenName": "Heribert",
+    "surName": "Hirsch",
+    "birthDate": "1961-12-21",
+    "isBusinessCustomer": false
+  }
+]

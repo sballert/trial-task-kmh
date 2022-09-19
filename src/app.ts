@@ -8,6 +8,10 @@ const port = 3030;
 
 const app = express();
 
+process.on("unhandledRejection", (reason, p) =>
+  log.error("Unhandled Rejection at: Promise ", p, reason),
+);
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
@@ -16,7 +20,3 @@ app.listen(port, host, () => {
 
   routes(app);
 });
-
-process.on("unhandledRejection", (reason, p) =>
-  log.error("Unhandled Rejection at: Promise ", p, reason),
-);
