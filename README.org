@@ -2,6 +2,108 @@
 
 A small REST API, which returns products, prices and user information for a certain or unknown user.
 
+** API
+
+*** Example 1
+
+#+BEGIN_SRC restclient
+  GET http://localhost:3030/api/getProductsForCustomer
+  Content-Type: application/json
+  {
+      "customerId": "0005465465"
+  }
+#+END_SRC
+
+*** Example 2
+
+#+BEGIN_SRC restclient
+  GET http://localhost:3030/api/getProductsForCustomer
+  Content-Type: application/json
+  {
+      "customerId": null,
+      "isBusinessCustomer": false
+  }
+#+END_SRC
+
+*** Example 3
+
+#+BEGIN_SRC restclient
+  GET http://localhost:3030/api/getProductsForCustomer
+  Content-Type: application/json
+  {
+      "isBusinessCustomer": true
+  }
+#+END_SRC
+
+*** Example 4
+
+#+BEGIN_SRC restclient
+  GET http://localhost:3030/api/getProductsForCustomer
+  Content-Type: application/json
+  {
+      "customerId": "000066220"
+  }
+#+END_SRC
+
+*** Example 5
+
+#+BEGIN_SRC restclient
+  GET http://localhost:3030/api/getProductsForCustomer
+  Content-Type: application/json
+  {
+      "customerId": "000028390"
+  }
+#+END_SRC
+
+** Architecture
+
+*** Task
+
+After returning the products from your REST API to a processing
+application, the application will return a JSON with a list of
+products the customer wants to order. The system you are working on
+has all information about an order entry API from a big warehouse
+where you should forward the order to. There are some limitations and
+constraints:
+
+- The order entry API (OEA) is only available within business hours
+- The OEA sometimes doesn't respond and don't seem to receive the order
+- You also must send batches of orders from another system, which you receive as an .csv file
+- Your application is hosted in a public cloud environment
+
+*** Solution
+
+[[./architecture.png]]
+
+To simpliefy this diagram, we only show one app instance, but in
+practice we can have multiple of it.
+
+Requests to our REST API are send to the *API-Gateway*. The
+*API-Gateway* forwards them to *Load-Balancer*. The *Load-Balances*
+delegates them with an appropriate algorithmn to the app instances.
+
+The app instances get the product information from the *Warehouse* and
+store them in the database. We update the product information in the
+*database* regularly within the business hours.
+
+There are two ways how order jobs can be generated for the *Message Queue*:
+
+- The app instance sends the products to the *Processing App* and gets
+  a JSON with a list of products the customer wants to order. The app
+  instance generates the order jobs from the list and send them to the
+  *Message Queue*
+- The CSV files with the batches of orders are stored by the *Another
+  System* in the *File Storage*. The app instances take the CSV files
+  and produce order jobs on the *Message Queue*.
+
+The order jobs of the *Message Queue* are processed by multiple
+workers. In our diagram, we only show two worker instances, but in
+practice we can have more of them. The worker instances are only
+active with business hours. A worker takes a order job from the
+*Message Queue* and tries to send it to the *Warehouse*. If the
+*Warehouse* doesn't receive the order successfully, the worker pushes
+the order job back to the *Message Queue* so that the processing of
+the order job will be tried again later.
 ** License
 
 #+begin_src text
