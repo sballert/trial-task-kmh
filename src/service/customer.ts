@@ -21,4 +21,18 @@ async function getCustomer(id: string): Promise<Customer | undefined> {
   });
 }
 
-export { getCustomer };
+async function getCustomerByIsBusinessCustomer(
+  isBusinessCustomer: boolean,
+): Promise<Customer | undefined> {
+  const customers = await getCustomers();
+
+  if (isEmpty(customers)) {
+    return undefined;
+  }
+
+  return find(customers, (customer: Customer) => {
+    return customer.isBusinessCustomer === isBusinessCustomer;
+  });
+}
+
+export { getCustomer, getCustomerByIsBusinessCustomer };

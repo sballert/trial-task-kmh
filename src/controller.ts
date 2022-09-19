@@ -1,6 +1,9 @@
 import { Request, Response } from "express";
 import log from "./logger";
-import { getCustomer } from "./service/customer";
+import {
+  getCustomer,
+  getCustomerByIsBusinessCustomer,
+} from "./service/customer";
 import { getAvailabilitiesForCustomer } from "./service/product-availability";
 import {
   getProductByProductCode,
@@ -14,13 +17,23 @@ async function getProductsForCustomer(
 ): Promise<any> {
   try {
     const customerId: string = req.body.customerId;
-    const isBusinessCustomer: string = req.body.isBusinessCustomer;
+    const isBusinessCustomer: boolean = req.body.isBusinessCustomer;
+    const isBusinessCustomerAsString: string = req.body.isBusinessCustomer;
 
     log.info(
-      `getProductsForCustomer(customerId="${customerId}",isBusinessCustomer="${isBusinessCustomer}")`,
+      `getProductsForCustomer(customerId="${customerId}",isBusinessCustomer="${isBusinessCustomerAsString}")`,
     );
 
-    const customer = await getCustomer(customerId);
+    let customer;
+
+    if (customerId !== undefined && customerId !== null) {
+      customer = await getCustomer(customerId);
+    }
+
+    if (isBusinessCustomer !== undefined) {
+      customer = await getCustomerByIsBusinessCustomer(isBusinessCustomer);
+    }
+
     const generallyAvailableProducts = await getGenerallyAvailableProducts();
 
     let products = generallyAvailableProducts;
@@ -62,7 +75,29 @@ async function getProductsForCustomer(
         price: price.bruttoPrice,
       });
     }
-    return res.send(formatedProducts);
+
+    if (customer !== undefined) {
+      return res.send({
+        isExistingCustomer: true,
+        customer: {
+          customerId: customer.customerId,
+          gender: customer.gender,
+          givenName: customer.givenName,
+          surName: customer.surName,
+          birthDate: customer.birthDate,
+          isBusinessCustomer: customer.isBusinessCustomer,
+        },
+        products: formatedProducts,
+      });
+    }
+
+    return res.send({
+      isExistingCustomer: false,
+      customer: {
+        customerId,
+      },
+      products: formatedProducts,
+    });
   } catch (e: any) {
     return res.status(500).json({
       status: false,
